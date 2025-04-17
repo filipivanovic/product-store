@@ -9,7 +9,12 @@ dotenv.config();
 
 const app = express();
 
-app.post("/products", async (req, res) => {
+app.use(express.json()); //allows us to accept JSON data in req.body (middleware)
+
+app.post("/api/products", async (req, res) => {
+  console.log(req);
+  console.log(res);
+
   const product = req.body; // user will send this data
 
   if (!product.name || !product.price || !product.image) {
@@ -18,17 +23,14 @@ app.post("/products", async (req, res) => {
   const newProduct = new Product(product);
   try {
     await newProduct.save();
-    res.status(201).json({ success: true, product: newProduct });
+    res.status(200).json({ success: true, product: newProduct });
   } catch (error) {
     console.log(`Error in create product: ${error.message}`);
     res.status(500).json({ success: false, message: `Server Error: ${error.message}` });
   }
 })
 
-
-
 app.listen(5000, () => {
   connectDB()
   console.log('Express server listening on port 5000...');
 });
-
