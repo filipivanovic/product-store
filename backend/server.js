@@ -13,5 +13,5 @@ app.use("/api/products", productsRoute)
 
 app.listen(5000, () => {
   connectDB()
-  console.log('Express server listening on port 5000...');
+  console.log('Express server listening on port 5000!...');
 });
