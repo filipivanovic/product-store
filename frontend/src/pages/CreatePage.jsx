@@ -39,7 +39,7 @@ const CreatePage = () => {
         isClosable: true,
       });
 
-      // Navigate to home after short delay (optional)
+      // Navigate home after short delay (optional)
       setTimeout(() => {
         navigate("/");
       }, 1000);
