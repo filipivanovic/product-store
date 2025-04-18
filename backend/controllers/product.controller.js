@@ -2,8 +2,9 @@ import Product from "../models/product.model.js";
 import mongoose from "mongoose";
 
 export const getProduct = async (req, res) => {
+  console.log(res, 'res')
   try {
-    const products = await Product.find({}) // empty object means find all
+    const products = await Product.find({}) // an empty object means find all
     res.status(200).json({ success: true, products })
   } catch (error) {
     console.error(`Error in fetching products: ${error.message}`)

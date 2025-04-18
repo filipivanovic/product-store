@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Container, Heading, Input, useColorModeValue, VStack } from "@chakra-ui/react";
 import { useProductStore } from "../store/product.js";
+import { useNavigate } from "react-router-dom";
 import { useToast } from '@chakra-ui/react'
 
 const CreatePage = () => {
@@ -14,6 +15,9 @@ const CreatePage = () => {
 
   const { createProduct } = useProductStore()
 
+
+  const navigate = useNavigate();
+
   const handleAddProduct = async () => {
     console.log(newProduct);
     const { success, message } = await createProduct(newProduct);
@@ -25,18 +29,25 @@ const CreatePage = () => {
         description: message,
         duration: 5000,
         isClosable: true,
-      })
+      });
     } else {
       toast({
         title: "Success",
         status: "success",
         description: message,
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
-      })
+      });
+
+      // Navigate to home after short delay (optional)
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     }
-    setNewProduct({name: '', price: '', image: ''})
-  }
+
+    setNewProduct({ name: '', price: '', image: '' });
+  };
+
 
   return (
     <Container maxW={"container.sm"}>
